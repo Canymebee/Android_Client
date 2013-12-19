@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -34,8 +38,23 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				System.out.println("---------->Button Clicked");
+
+				JSONObject message = new JSONObject();
+				JSONArray Location = new JSONArray();
+				try {						
+					message.put("Type","Search");
+					message.put("SenderID","123456");
+					message.put("ReceiverID","654321");
+					message.put("Content",edit.getText().toString());
+					Location.put("1234").put("5678");
+					message.put("Location",Location);
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
-				SendMsgTask sendTask = new SendMsgTask(edit.getText().toString());
+				SendMsgTask sendTask = new SendMsgTask(message.toString());
 				sendTask.execute();
 		}
 		});
